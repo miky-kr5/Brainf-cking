@@ -112,6 +112,34 @@ eif1:
 	/* Loop through all arguments */
 	movl $0, %edi
 loop_start:
+	/* Reset everything. */
+	pushl %eax
+	pushl %ecx
+	pushl %edx
+	pushl $30000
+	pushl $0
+	pushl $tape
+	call memset
+	addl $12, %esp
+	popl %edx
+	popl %ecx
+	popl %eax
+
+	pushl %eax
+	pushl %ecx
+	pushl %edx
+	pushl $4100
+	pushl $0
+	pushl $jmp_stack
+	call memset
+	addl $12, %esp
+	popl %edx
+	popl %ecx
+	popl %eax
+
+	movl $0, ptr
+	movl $0, loop_ptr
+	
 	/* Process current input file */
 	pushl %eax
 	pushl %ecx
@@ -126,9 +154,11 @@ loop_start:
 	/* Get current argument length */
 	pushl %ecx
 	pushl %edx
+	pushl %edi
 	pushl %edx
 	call strlen
 	add $4, %esp
+	popl %edi
 	popl %edx
 	popl %ecx
 
