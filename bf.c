@@ -12,13 +12,12 @@ static long loop_stack[MAX_LOOPS];    /* Loop stack. */
 static unsigned int tape_ptr = 0;     /* Current tape position. */
 static unsigned int loop_ptr = 0;     /* Loop stack top. */
 
-int
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
   FILE *       f;    /* The input file. */  
   unsigned int i;    /* The current file being processed. */
   unsigned int l;    /* A counter for looping. */
   unsigned int done; /* Boolean for looping. */
-  char c;            /* Current BF instruction. */
+  char         c;    /* Current BF instruction. */
 
   if (argc == 1) {
     /* There must be at leas one input file. */
@@ -39,7 +38,7 @@ main (int argc, char **argv) {
       f = fopen (argv[i], "r");
 
       if (f == NULL) {
-	fprintf (stderr, "Failed to open %s\n", argv[1]);
+	fprintf (stderr, "Failed to open %s\n", argv[i]);
 	continue;
 
       } else {
@@ -113,7 +112,7 @@ main (int argc, char **argv) {
 		  switch(c) {
 		  case EOF:
 		    /* Skip the file on EOF. */
-		    fprintf (stderr, "%s: Fatal error in %s: premature EOF\n", argv[0], argv[1]);
+		    fprintf (stderr, "%s: Fatal error in %s: premature EOF\n", argv[0], argv[i]);
 		    goto skip;
 		    break;
 
